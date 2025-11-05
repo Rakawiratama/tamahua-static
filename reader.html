@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baca Komik - Tamahua</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="main-header">
+        <a href="index.html" class="logo">Tamahua - Reader</a>
+    </header>
+
+    <main class="reader-page">
+        <div class="reader-content" style="padding: 20px; text-align: center;">
+            <h1 id="comic-title-display">Halaman Pembaca</h1>
+            <p>Anda sedang membaca komik dengan ID: <span id="comic-id-display"></span></p>
+            <div style="max-width: 800px; margin: 20px auto; background-color: #f0f0f0; padding: 50px 20px; border: 1px dashed #ccc; color: #666; font-size: 1.2em;">
+                Placeholder Halaman Komik 1
+            </div>
+            <div style="max-width: 800px; margin: 20px auto; background-color: #f0f0f0; padding: 50px 20px; border: 1px dashed #ccc; color: #666; font-size: 1.2em;">
+                Placeholder Halaman Komik 2
+            </div>
+            <p>Selamat membaca!</p>
+            <a href="javascript:history.back()" class="cta-button">Kembali ke Detail</a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const comicId = urlParams.get('id');
+            document.getElementById('comic-id-display').textContent = comicId || 'Tidak Ditemukan';
+            // Bisa tambahkan logic untuk mencari dan menampilkan judul komik jika perlu
+        });
+    </script>
+</body>
+</html>
