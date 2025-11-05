@@ -1,0 +1,467 @@
+/* assets/css/style.css - REVISI LENGKAP V2: Perbaikan Navigasi Desktop */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #A03131; /* Merah Marun */
+    --secondary-color: #E7B678; /* Coklat Emas */
+    --text-color: #333;
+    --light-text: #fff;
+    --light-bg: #f4f4f4;
+    --dark-bg: #222;
+    --max-width: 1200px;
+    --hover-primary: #7a2525;
+    --shadow-light: 0 2px 5px rgba(0,0,0,0.1);
+    --shadow-hover: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* --- Global Reset and Typography --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- Layout Container --- */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --- Header & Navigation --- */
+.main-header {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-light);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--light-text);
+}
+
+.nav-toggle {
+    display: block; 
+    background: none;
+    border: none;
+    color: var(--light-text);
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 101; 
+}
+
+/* Mobile Navigation Default State */
+nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 10px 0;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    /* Mulai tersembunyi dengan transisi */
+    transform: translateY(-150%);
+    pointer-events: none;
+}
+
+/* Mobile Navigation Visible State (Controlled by JavaScript attribute data-visible) */
+nav[data-visible="true"] {
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.nav-list {
+    list-style: none;
+}
+
+.nav-list li {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-list li:first-child {
+    border-top: none; /* Hapus border atas untuk item pertama */
+}
+
+.nav-list a {
+    color: var(--light-text);
+    display: block;
+    padding: 15px 20px;
+    transition: background-color 0.3s;
+}
+
+.nav-list a:hover {
+    background-color: var(--hover-primary);
+}
+
+/* --- Hero Section --- */
+.hero {
+    background-color: var(--light-bg); 
+    padding: 60px 20px; 
+    text-align: center;
+    margin-bottom: 30px;
+    
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
+        url('../img/japan-background-digital-art.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--light-text); 
+}
+
+.hero h1 {
+    color: var(--light-text); 
+    margin-bottom: 15px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+}
+
+.hero p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+/* --- Buttons --- */
+.cta-button, .secondary-button {
+    display: inline-block;
+    padding: 12px 25px; 
+    border-radius: 5px;
+    margin: 10px 5px; 
+    font-weight: 600;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cta-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    background-color: #d1a164;
+    transform: translateY(-2px);
+}
+
+.secondary-button {
+    border: 2px solid var(--primary-color); 
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.secondary-button:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    transform: translateY(-2px);
+}
+
+.center-text {
+    text-align: center;
+    margin: 30px auto;
+}
+
+/* --- Content Sections --- */
+.content-section {
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.content-section h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--secondary-color); 
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* --- Comic Grid and Cards --- */
+.comics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+    gap: 20px;
+}
+
+.comic-card {
+    background-color: var(--light-text);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.comic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.comic-cover {
+    width: 100%;
+    height: 180px; 
+    object-fit: cover;
+    display: block;
+}
+
+.card-info {
+    padding: 15px 10px;
+    min-height: 120px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-info h4 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    min-height: 40px; 
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.author, .genres {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.genre-tag {
+    display: inline-block;
+    background-color: #eee;
+    padding: 3px 8px;
+    border-radius: 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 0.7em;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.read-button {
+    display: block;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 8px 0;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.read-button:hover {
+    background-color: var(--hover-primary);
+}
+
+/* --- Catalog Filter Styles --- */
+.genre-filters-container {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.genre-filter-button {
+    background-color: var(--light-text);
+    border: 2px solid var(--secondary-color);
+    color: var(--text-color);
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    font-weight: 500;
+}
+
+.genre-filter-button.active,
+.genre-filter-button:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    border-color: var(--primary-color);
+}
+
+/* --- Detail Page Styles --- */
+.detail-header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.detail-cover {
+    width: 80%;
+    max-width: 250px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.detail-info {
+    text-align: center;
+}
+
+.detail-info h1 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.detail-info p {
+    margin-bottom: 15px;
+}
+
+.detail-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+    margin: 15px auto 0;
+}
+
+.read-detail-button, .detail-wa-button {
+    display: block;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.read-detail-button {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+}
+
+.read-detail-button:hover {
+    background-color: var(--hover-primary);
+    transform: translateY(-1px);
+}
+
+.detail-wa-button {
+    background-color: #25d366; 
+    color: var(--light-text);
+}
+
+.detail-wa-button:hover {
+    background-color: #1e9d4e;
+    transform: translateY(-1px);
+}
+
+/* --- Footer --- */
+.main-footer {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    text-align: center;
+    padding: 25px 20px;
+    margin-top: 50px;
+    font-size: 0.9em;
+}
+
+.main-footer a {
+    color: var(--secondary-color);
+    transition: color 0.3s;
+}
+
+.main-footer a:hover {
+    color: #fff;
+}
+
+/* --- Desktop Styles (Media Query) --- */
+@media (min-width: 768px) {
+    /* Header & Navigation Desktop FIX */
+    .nav-toggle {
+        display: none;
+    }
+    nav {
+        display: block !important; /* Paksa agar terlihat */
+        position: static; /* Hilangkan posisi absolute */
+        width: auto;
+        padding: 0;
+        transform: none; /* Hilangkan transform */
+        pointer-events: auto;
+    }
+    .nav-list {
+        display: flex; /* Jadikan list horizontal */
+        gap: 25px;
+        margin-left: auto; /* Opsional: dorong list ke kanan */
+    }
+    .nav-list li {
+        padding: 0;
+        border: none;
+    }
+    .nav-list a {
+        padding: 5px 0;
+        background: none;
+    }
+    .nav-list a:hover {
+        background: none;
+        color: var(--secondary-color);
+    }
+    
+    /* Content Desktop */
+    .hero {
+        padding: 80px 40px;
+    }
+    .comics-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    .comic-cover {
+        height: 250px;
+    }
+    .comic-card {
+        min-height: 400px; 
+    }
+    .card-info h4 {
+        font-size: 1.1em;
+    }
+    
+    /* Detail Page Desktop */
+    .detail-header {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+    }
+    .detail-cover {
+        width: 300px;
+        min-width: 300px;
+        height: 420px;
+        margin: 0;
+    }
+    .detail-info {
+        text-align: left;
+    }
+    .detail-buttons {
+        flex-direction: row;
+        width: auto;
+        max-width: none;
+        margin: 15px 0 0;
+    }
+    .read-detail-button, .detail-wa-button {
+        display: inline-block;
+        width: auto;
+        margin-right: 15px;
+    }
+}
