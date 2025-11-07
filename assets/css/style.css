@@ -1,4 +1,3 @@
-/* assets/css/style.css - REVISI LENGKAP V3: FINAL MOBILE & DESKTOP FIXES */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
@@ -26,7 +25,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--light-bg);
-    overflow-x: hidden; 
+    overflow-x: hidden; /* Mencegah scroll horizontal body */
 }
 
 a {
@@ -63,7 +62,7 @@ main {
     color: var(--light-text);
 }
 
-/* Nav Toggle (Hamburger Button Container) */
+/* Nav Toggle Button */
 .nav-toggle {
     display: flex; 
     align-items: center;
@@ -85,7 +84,7 @@ main {
     outline-color: var(--secondary-color);
 }
 
-/* --- Ikon Hamburger CSS (Dibangun dari span) --- */
+/* --- Ikon Hamburger --- */
 .hamburger,
 .hamburger::before,
 .hamburger::after {
@@ -112,7 +111,7 @@ main {
     bottom: -8px; 
 }
 
-/* Transformasi menjadi Close Icon saat aria-expanded="true" */
+/* Transformasi menjadi Close Icon */
 .nav-toggle[aria-expanded="true"] .hamburger {
     transform: rotate(45deg); 
 }
@@ -123,12 +122,10 @@ main {
 }
 
 .nav-toggle[aria-expanded="true"] .hamburger::after {
-    /* Gunakan rotate 90deg agar garis bawah ikut berputar */
     transform: rotate(90deg) translate(-8px); 
     bottom: 0;
     opacity: 0; /* Sembunyikan garis bawah */
 }
-/* --- Akhir Ikon Hamburger CSS --- */
 
 /* Mobile Navigation Default State (Hidden Overlay) */
 nav {
@@ -139,12 +136,11 @@ nav {
     width: 70%;
     max-width: 300px;
     background-color: var(--primary-color);
-    padding: 80px 0 20px 0; /* Padding agar di bawah header */
+    padding: 80px 0 20px 0; 
     text-align: center;
     transition: transform 0.3s ease-in-out;
     
-    /* Mulai tersembunyi ke kanan */
-    transform: translateX(100%);
+    transform: translateX(100%); /* Sembunyikan ke kanan */
     pointer-events: none;
     z-index: 90; 
 }
@@ -183,9 +179,10 @@ nav[data-visible="true"] {
 }
 
 /* -------------------------------------- */
-/* --- Content Sections (Styles Mostly Unchanged) --- */
+/* --- Content Sections --- */
 /* -------------------------------------- */
 
+/* --- Hero Section --- */
 .hero {
     background-color: var(--light-bg); 
     padding: 60px 20px; 
@@ -212,12 +209,62 @@ nav[data-visible="true"] {
     margin-bottom: 20px;
 }
 
-/* ... (Buttons, Section Titles, Filters Styles tetap sama) ... */
+/* --- Buttons --- */
+.cta-button, .secondary-button {
+    display: inline-block;
+    padding: 12px 25px; 
+    border-radius: 5px;
+    margin: 10px 5px; 
+    font-weight: 600;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
-/* --- Comic Grid and Cards (Optimasi Mobile Grid) --- */
+.cta-button {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    background-color: #d1a164;
+    transform: translateY(-2px);
+}
+
+.secondary-button {
+    border: 2px solid var(--primary-color); 
+    color: var(--primary-color);
+    background-color: transparent;
+}
+
+.secondary-button:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    transform: translateY(-2px);
+}
+
+.center-text {
+    text-align: center;
+    margin: 30px auto;
+}
+
+.content-section {
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.content-section h2 {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--secondary-color); 
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* --- Comic Grid and Cards --- */
 .comics-grid {
     display: grid;
-    /* Memastikan minimal 2 kolom di layar kecil */
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
     gap: 20px;
 }
@@ -249,9 +296,85 @@ nav[data-visible="true"] {
     flex-direction: column;
     justify-content: space-between;
 }
-/* ... (Card Info Styles lainnya tetap sama) ... */
 
-/* --- Detail Page Styles (Mobile) --- */
+.card-info h4 {
+    font-size: 1em;
+    margin-bottom: 5px;
+    min-height: 40px; 
+    overflow: hidden;
+    line-height: 1.2;
+    margin-top: 5px; /* Added for better spacing */
+}
+
+.author, .genres {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 3px;
+}
+.author {
+    margin-bottom: 8px;
+}
+
+.genre-tag {
+    display: inline-block;
+    background-color: #eee;
+    padding: 3px 8px;
+    border-radius: 15px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 0.7em;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+
+.read-button {
+    display: block;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 8px 0;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.read-button:hover {
+    background-color: var(--hover-primary);
+}
+
+/* --- Catalog Filter Styles  --- */
+.genre-filters-container {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: nowrap; /* Gunakan nowrap dengan overflow-x: auto */
+    gap: 10px;
+    justify-content: flex-start; /* Sejajarkan ke kiri di mobile */
+    overflow-x: auto; /* Memungkinkan scroll horizontal */
+    padding-bottom: 5px;
+}
+
+.genre-filter-button {
+    background-color: var(--light-text);
+    border: 2px solid var(--secondary-color);
+    color: var(--text-color);
+    padding: 8px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    font-weight: 500;
+    flex-shrink: 0; /* Mencegah tombol menyusut */
+    white-space: nowrap; /* Mencegah teks terpotong */
+}
+
+.genre-filter-button.active,
+.genre-filter-button:hover {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    border-color: var(--primary-color);
+}
+
+/* --- Detail Page Styles --- */
 .detail-header {
     display: flex;
     flex-direction: column;
@@ -274,6 +397,15 @@ nav[data-visible="true"] {
     text-align: center;
 }
 
+.detail-info h1 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.detail-info p {
+    margin-bottom: 15px;
+}
+
 .detail-buttons {
     display: flex;
     flex-direction: column;
@@ -281,6 +413,35 @@ nav[data-visible="true"] {
     width: 100%;
     max-width: 300px;
     margin: 15px auto 0;
+}
+
+.read-detail-button, .detail-wa-button {
+    display: block;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-weight: 700;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.read-detail-button {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+}
+
+.read-detail-button:hover {
+    background-color: var(--hover-primary);
+    transform: translateY(-1px);
+}
+
+.detail-wa-button {
+    background-color: #25d366; 
+    color: var(--light-text);
+}
+
+.detail-wa-button:hover {
+    background-color: #1e9d4e;
+    transform: translateY(-1px);
 }
 
 /* --- Footer --- */
@@ -291,6 +452,15 @@ nav[data-visible="true"] {
     padding: 25px 20px;
     margin-top: 50px;
     font-size: 0.9em;
+}
+
+.main-footer a {
+    color: var(--secondary-color);
+    transition: color 0.3s;
+}
+
+.main-footer a:hover {
+    color: #fff;
 }
 
 /* -------------------------------------- */
@@ -335,7 +505,7 @@ nav[data-visible="true"] {
     .nav-list a {
         padding: 5px 0;
         background: none;
-        color: var(--light-text); /* Pastikan warna kembali ke light-text */
+        color: var(--light-text);
         border-bottom: 2px solid transparent; 
         transition: border-color 0.3s, color 0.3s;
     }
@@ -345,7 +515,7 @@ nav[data-visible="true"] {
         color: var(--secondary-color);
         border-bottom-color: var(--secondary-color); 
     }
-    
+
     /* Content Desktop */
     .hero {
         padding: 80px 40px;
@@ -361,6 +531,13 @@ nav[data-visible="true"] {
 
     .comic-card {
         min-height: 400px; 
+    }
+    
+    /* Catalog Filter Desktop Fix */
+    .genre-filters-container {
+        justify-content: center; /* Tengahkan kembali filter di desktop */
+        flex-wrap: wrap; /* Izinkan wrap kembali */
+        overflow-x: visible;
     }
     
     /* Detail Page Desktop */
