@@ -1,4 +1,4 @@
-/* assets/css/style.css - REVISI LENGKAP V2.1: Perbaikan Navigasi Mobile & Optimasi */
+/* assets/css/style.css - REVISI LENGKAP V3: FINAL MOBILE & DESKTOP FIXES */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
@@ -26,7 +26,6 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--light-bg);
-    /* Mencegah scroll saat menu mobile terbuka */
     overflow-x: hidden; 
 }
 
@@ -64,15 +63,20 @@ main {
     color: var(--light-text);
 }
 
+/* Nav Toggle (Hamburger Button Container) */
 .nav-toggle {
-    display: block; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    width: 40px; 
+    height: 40px;
     background: none;
     border: none;
     color: var(--light-text);
-    font-size: 1.5em;
     cursor: pointer;
     z-index: 101; 
-    /* Tambahkan focus ring yang terlihat */
+    position: relative;
+    padding: 0;
     outline: 2px solid transparent; 
     outline-offset: 5px;
 }
@@ -81,36 +85,79 @@ main {
     outline-color: var(--secondary-color);
 }
 
+/* --- Ikon Hamburger CSS (Dibangun dari span) --- */
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    display: block;
+    width: 25px; 
+    height: 3px; 
+    background: var(--light-text);
+    border-radius: 3px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.hamburger {
+    position: relative;
+}
+
+.hamburger::before {
+    position: absolute;
+    top: -8px; 
+}
+
+.hamburger::after {
+    position: absolute;
+    bottom: -8px; 
+}
+
+/* Transformasi menjadi Close Icon saat aria-expanded="true" */
+.nav-toggle[aria-expanded="true"] .hamburger {
+    transform: rotate(45deg); 
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::before {
+    transform: rotate(90deg) translate(8px);
+    top: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .hamburger::after {
+    /* Gunakan rotate 90deg agar garis bawah ikut berputar */
+    transform: rotate(90deg) translate(-8px); 
+    bottom: 0;
+    opacity: 0; /* Sembunyikan garis bawah */
+}
+/* --- Akhir Ikon Hamburger CSS --- */
+
 /* Mobile Navigation Default State (Hidden Overlay) */
 nav {
-    /* Menggunakan fixed untuk menu overlay */
     position: fixed;
-    top: 0; /* Mulai dari atas viewport */
+    top: 0; 
     right: 0;
-    height: 100vh; /* Ambil seluruh tinggi viewport */
-    width: 70%; /* Lebar menu 70% dari layar */
-    max-width: 300px; /* Batasi lebar maksimal */
+    height: 100vh;
+    width: 70%;
+    max-width: 300px;
     background-color: var(--primary-color);
-    padding: 80px 0 20px 0; /* Padding atas disesuaikan untuk di bawah header */
+    padding: 80px 0 20px 0; /* Padding agar di bawah header */
     text-align: center;
     transition: transform 0.3s ease-in-out;
     
     /* Mulai tersembunyi ke kanan */
     transform: translateX(100%);
     pointer-events: none;
-    z-index: 90; /* Di bawah header, tapi di atas konten */
+    z-index: 90; 
 }
 
-/* Mobile Navigation Visible State (Controlled by JavaScript attribute data-visible) */
+/* Mobile Navigation Visible State */
 nav[data-visible="true"] {
-    transform: translateX(0); /* Geser ke posisi normal */
+    transform: translateX(0);
     pointer-events: auto;
     box-shadow: -5px 0 15px rgba(0,0,0,0.2);
 }
 
 .nav-list {
     list-style: none;
-    /* Tambahkan gulir untuk item nav yang banyak */
     overflow-y: auto; 
     height: 100%;
 }
@@ -135,13 +182,10 @@ nav[data-visible="true"] {
     background-color: var(--hover-primary);
 }
 
-
 /* -------------------------------------- */
-/* --- Content Sections --- */
+/* --- Content Sections (Styles Mostly Unchanged) --- */
 /* -------------------------------------- */
 
-/* --- Hero Section --- */
-/* ... (Style Hero tetap sama) ... */
 .hero {
     background-color: var(--light-bg); 
     padding: 60px 20px; 
@@ -168,33 +212,49 @@ nav[data-visible="true"] {
     margin-bottom: 20px;
 }
 
-/* --- Buttons --- */
-/* ... (Style Buttons tetap sama) ... */
-/* --- Content Section Titles --- */
-/* ... (Style Content Section tetap sama) ... */
+/* ... (Buttons, Section Titles, Filters Styles tetap sama) ... */
 
 /* --- Comic Grid and Cards (Optimasi Mobile Grid) --- */
 .comics-grid {
     display: grid;
-    /* Ubah ke minimal 140px agar di layar kecil (320px) minimal 2 kolom */
+    /* Memastikan minimal 2 kolom di layar kecil */
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
     gap: 20px;
 }
 
+.comic-card {
+    background-color: var(--light-text);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.comic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
 .comic-cover {
     width: 100%;
-    height: 180px; /* Pertahankan tinggi cover yang proporsional di mobile */
+    height: 180px; 
     object-fit: cover;
     display: block;
 }
 
-/* ... (Style Card Info, Author, Read Button tetap sama) ... */
+.card-info {
+    padding: 15px 10px;
+    min-height: 120px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* ... (Card Info Styles lainnya tetap sama) ... */
 
-
-/* --- Detail Page Styles (Optimasi Mobile Detail) --- */
+/* --- Detail Page Styles (Mobile) --- */
 .detail-header {
     display: flex;
-    flex-direction: column; /* Tetap kolom untuk mobile */
+    flex-direction: column;
     gap: 20px;
     align-items: center;
     padding-bottom: 20px;
@@ -211,43 +271,49 @@ nav[data-visible="true"] {
 }
 
 .detail-info {
-    text-align: center; /* Tetap center untuk mobile */
+    text-align: center;
 }
 
 .detail-buttons {
     display: flex;
-    flex-direction: column; /* Tetap kolom untuk mobile */
+    flex-direction: column;
     gap: 10px;
     width: 100%;
     max-width: 300px;
     margin: 15px auto 0;
 }
 
-/* ... (Style Detail Buttons lainnya tetap sama) ... */
-
 /* --- Footer --- */
-/* ... (Style Footer tetap sama) ... */
-
+.main-footer {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    text-align: center;
+    padding: 25px 20px;
+    margin-top: 50px;
+    font-size: 0.9em;
+}
 
 /* -------------------------------------- */
 /* --- Desktop Styles (Media Query) --- */
 /* -------------------------------------- */
 @media (min-width: 768px) {
     
-    /* Header & Navigation Desktop FIX */
+    /* Sembunyikan Toggle di Desktop */
     .nav-toggle {
         display: none;
     }
 
+    /* Reset Navigasi Mobile ke Desktop Style */
     nav {
-        /* Reset properti mobile fixed/overlay */
         position: static; 
         height: auto;
         width: auto;
+        top: auto;
+        right: auto;
         padding: 0;
         transform: none; 
         pointer-events: auto;
-        background-color: transparent; /* Sesuaikan dengan header color */
+        background-color: transparent; 
         max-width: none;
         box-shadow: none;
         z-index: 100;
@@ -269,7 +335,7 @@ nav[data-visible="true"] {
     .nav-list a {
         padding: 5px 0;
         background: none;
-        /* Tambahkan garis bawah saat hover */
+        color: var(--light-text); /* Pastikan warna kembali ke light-text */
         border-bottom: 2px solid transparent; 
         transition: border-color 0.3s, color 0.3s;
     }
@@ -295,10 +361,6 @@ nav[data-visible="true"] {
 
     .comic-card {
         min-height: 400px; 
-    }
-    
-    .card-info h4 {
-        font-size: 1.1em;
     }
     
     /* Detail Page Desktop */
